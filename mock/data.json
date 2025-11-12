@@ -1,0 +1,404 @@
+{
+  "treatments": [
+    {
+      "id": 1,
+      "patient": "Emily Carter",
+      "procedure": "Routine Cleaning",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-01-12",
+      "status": "scheduled",
+      "notes": "First visit of the year.",
+      "cost": 120
+    },
+    {
+      "id": 2,
+      "patient": "Marcus Lee",
+      "procedure": "Root Canal",
+      "dentist": "Dr. Patel",
+      "date": "2025-01-18",
+      "status": "in_progress",
+      "notes": "Follow-up required in 6 weeks.",
+      "cost": 980
+    },
+    {
+      "id": 3,
+      "patient": "Hannah Stone",
+      "procedure": "Whitening Treatment",
+      "dentist": "Dr. Harper",
+      "date": "2024-12-04",
+      "status": "completed",
+      "notes": "Patient requested maintenance plan.",
+      "cost": 340
+    },
+    {
+      "id": 4,
+      "patient": "David Chen",
+      "procedure": "Crown Fitting",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-02-02",
+      "status": "in_progress",
+      "notes": "Waiting on lab results for permanent crown.",
+      "cost": 760
+    },
+    {
+      "id": 5,
+      "patient": "Sara Nunez",
+      "procedure": "Wisdom Tooth Extraction",
+      "dentist": "Dr. Hart",
+      "date": "2025-01-30",
+      "status": "cancelled",
+      "notes": "Patient requested reschedule due to travel.",
+      "cost": 540
+    },
+    {
+      "id": 6,
+      "patient": "Leo Wright",
+      "procedure": "Dental Implant Consultation",
+      "dentist": "Dr. Patel",
+      "date": "2025-03-07",
+      "status": "scheduled",
+      "notes": "Evaluate bone density and insurance coverage.",
+      "cost": 150
+    },
+    {
+      "id": 7,
+      "patient": "Amelia Rhodes",
+      "procedure": "Orthodontic Evaluation",
+      "dentist": "Dr. Harper",
+      "date": "2025-02-20",
+      "status": "scheduled",
+      "notes": "Considering clear aligners.",
+      "cost": 220
+    },
+    {
+      "id": 8,
+      "patient": "Isaac Murphy",
+      "procedure": "Dental Bridge Placement",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-02-28",
+      "status": "in_progress",
+      "notes": "Temporary bridge installed.",
+      "cost": 1200
+    },
+    {
+      "id": 9,
+      "patient": "Olivia Bennett",
+      "procedure": "Fluoride Treatment",
+      "dentist": "Dr. Hart",
+      "date": "2025-01-15",
+      "status": "completed",
+      "notes": "Return in 6 months.",
+      "cost": 80
+    },
+    {
+      "id": 10,
+      "patient": "Jasper Collins",
+      "procedure": "Night Guard Fitting",
+      "dentist": "Dr. Patel",
+      "date": "2025-02-05",
+      "status": "scheduled",
+      "notes": "Patient reports bruxism.",
+      "cost": 310
+    },
+    {
+      "id": 11,
+      "patient": "Mia Thompson",
+      "procedure": "Invisalign Checkup",
+      "dentist": "Dr. Harper",
+      "date": "2025-02-08",
+      "status": "completed",
+      "notes": "Switched to tray set #14.",
+      "cost": 200
+    },
+    {
+      "id": 12,
+      "patient": "Louis Parker",
+      "procedure": "Gum Contouring",
+      "dentist": "Dr. Hart",
+      "date": "2025-03-01",
+      "status": "scheduled",
+      "notes": "Discuss sedation options.",
+      "cost": 450
+    },
+    {
+      "id": 13,
+      "patient": "Charlotte Gray",
+      "procedure": "Dental Sealants",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-01-22",
+      "status": "completed",
+      "notes": "Applied to molars.",
+      "cost": 160
+    },
+    {
+      "id": 14,
+      "patient": "Henry Wilson",
+      "procedure": "Periodontal Maintenance",
+      "dentist": "Dr. Patel",
+      "date": "2025-02-18",
+      "status": "in_progress",
+      "notes": "Four quadrants planned.",
+      "cost": 680
+    },
+    {
+      "id": 15,
+      "patient": "Sophie Ramirez",
+      "procedure": "Dental Implant Placement",
+      "dentist": "Dr. Harper",
+      "date": "2025-03-12",
+      "status": "scheduled",
+      "notes": "Awaiting CT scan review.",
+      "cost": 2400
+    },
+    {
+      "id": 16,
+      "patient": "Ethan Brooks",
+      "procedure": "Fillings",
+      "dentist": "Dr. Hart",
+      "date": "2025-01-27",
+      "status": "completed",
+      "notes": "Two surfaces restored.",
+      "cost": 260
+    },
+    {
+      "id": 17,
+      "patient": "Penelope Hughes",
+      "procedure": "Veneer Consultation",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-02-14",
+      "status": "scheduled",
+      "notes": "Discuss shade options.",
+      "cost": 180
+    },
+    {
+      "id": 18,
+      "patient": "Gavin Mitchell",
+      "procedure": "Full Mouth X-Ray",
+      "dentist": "Dr. Patel",
+      "date": "2025-01-10",
+      "status": "cancelled",
+      "notes": "Baseline imaging.",
+      "cost": 190
+    },
+    {
+      "id": 19,
+      "patient": "Zoe Carter",
+      "procedure": "Orthodontic Retainer Check",
+      "dentist": "Dr. Harper",
+      "date": "2025-02-03",
+      "status": "completed",
+      "notes": "Retainer fits well.",
+      "cost": 95
+    },
+    {
+      "id": 20,
+      "patient": "Noah Jenkins",
+      "procedure": "Partial Denture Adjustment",
+      "dentist": "Dr. Hart",
+      "date": "2025-03-04",
+      "status": "scheduled",
+      "notes": "Reline appointment.",
+      "cost": 360
+    },
+    {
+      "id": 21,
+      "patient": "Isabella Reed",
+      "procedure": "Scaling and Root Planing",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-02-11",
+      "status": "in_progress",
+      "notes": "Quadrants 1 & 2 completed.",
+      "cost": 520
+    },
+    {
+      "id": 22,
+      "patient": "Logan Price",
+      "procedure": "Sedation Dentistry",
+      "dentist": "Dr. Patel",
+      "date": "2025-03-15",
+      "status": "scheduled",
+      "notes": "Pre-op instructions emailed.",
+      "cost": 900
+    },
+    {
+      "id": 23,
+      "patient": "Victoria James",
+      "procedure": "Smile Design Consultation",
+      "dentist": "Dr. Harper",
+      "date": "2025-01-29",
+      "status": "completed",
+      "notes": "Review mock-ups next visit.",
+      "cost": 210
+    },
+    {
+      "id": 24,
+      "patient": "Wyatt Sanders",
+      "procedure": "Emergency Toothache Visit",
+      "dentist": "Dr. Hart",
+      "date": "2025-01-09",
+      "status": "completed",
+      "notes": "Prescribed antibiotics.",
+      "cost": 130
+    },
+    {
+      "id": 25,
+      "patient": "Harper Lewis",
+      "procedure": "Routine Cleaning",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-02-24",
+      "status": "scheduled",
+      "notes": "Prefers morning appointments.",
+      "cost": 120
+    },
+    {
+      "id": 26,
+      "patient": "Benjamin Scott",
+      "procedure": "Root Planing Follow-up",
+      "dentist": "Dr. Patel",
+      "date": "2025-03-08",
+      "status": "scheduled",
+      "notes": "Evaluate tissue response.",
+      "cost": 220
+    },
+    {
+      "id": 27,
+      "patient": "Aria Johnson",
+      "procedure": "Pediatric Checkup",
+      "dentist": "Dr. Harper",
+      "date": "2025-01-16",
+      "status": "completed",
+      "notes": "Applied fluoride varnish.",
+      "cost": 110
+    },
+    {
+      "id": 28,
+      "patient": "Owen Kim",
+      "procedure": "Tooth Extraction",
+      "dentist": "Dr. Hart",
+      "date": "2025-02-07",
+      "status": "completed",
+      "notes": "Wisdom tooth #32 removed.",
+      "cost": 480
+    },
+    {
+      "id": 29,
+      "patient": "Luna Foster",
+      "procedure": "Dental Bonding",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-02-26",
+      "status": "scheduled",
+      "notes": "Repair chipped incisor.",
+      "cost": 320
+    },
+    {
+      "id": 30,
+      "patient": "Caleb Morris",
+      "procedure": "Occlusal Adjustment",
+      "dentist": "Dr. Patel",
+      "date": "2025-01-21",
+      "status": "completed",
+      "notes": "Resolved TMJ discomfort.",
+      "cost": 175
+    },
+    {
+      "id": 31,
+      "patient": "Elena Pierce",
+      "procedure": "Mouthguard Replacement",
+      "dentist": "Dr. Harper",
+      "date": "2025-03-05",
+      "status": "scheduled",
+      "notes": "Athletic use.",
+      "cost": 250
+    },
+    {
+      "id": 32,
+      "patient": "Julian Ortiz",
+      "procedure": "Teeth Whitening",
+      "dentist": "Dr. Hart",
+      "date": "2025-02-12",
+      "status": "completed",
+      "notes": "Provided aftercare kit.",
+      "cost": 400
+    },
+    {
+      "id": 33,
+      "patient": "Madeline Cooper",
+      "procedure": "Crown Preparation",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-03-02",
+      "status": "in_progress",
+      "notes": "Temporary crown placed.",
+      "cost": 830
+    },
+    {
+      "id": 34,
+      "patient": "Silas Walker",
+      "procedure": "Bridge Adjustment",
+      "dentist": "Dr. Patel",
+      "date": "2025-02-09",
+      "status": "completed",
+      "notes": "Adjusted bite alignment.",
+      "cost": 260
+    },
+    {
+      "id": 35,
+      "patient": "Naomi Fisher",
+      "procedure": "Gum Graft Consultation",
+      "dentist": "Dr. Harper",
+      "date": "2025-01-25",
+      "status": "scheduled",
+      "notes": "Review recovery timeline.",
+      "cost": 190
+    },
+    {
+      "id": 36,
+      "patient": "Dexter Hall",
+      "procedure": "Implant Follow-up",
+      "dentist": "Dr. Hart",
+      "date": "2025-02-17",
+      "status": "completed",
+      "notes": "Osseointegration looks good.",
+      "cost": 310
+    },
+    {
+      "id": 37,
+      "patient": "Quinn Barrett",
+      "procedure": "Dental Exam",
+      "dentist": "Dr. Alvarez",
+      "date": "2025-01-19",
+      "status": "completed",
+      "notes": "Recommend sealants next visit.",
+      "cost": 140
+    },
+    {
+      "id": 38,
+      "patient": "Tessa Green",
+      "procedure": "Retainer Replacement",
+      "dentist": "Dr. Patel",
+      "date": "2025-03-03",
+      "status": "scheduled",
+      "notes": "3D scan scheduled.",
+      "cost": 270
+    },
+    {
+      "id": 39,
+      "patient": "Riley Summers",
+      "procedure": "Wisdom Tooth Evaluation",
+      "dentist": "Dr. Harper",
+      "date": "2025-02-01",
+      "status": "completed",
+      "notes": "Extraction recommended.",
+      "cost": 150
+    },
+    {
+      "id": 40,
+      "patient": "Cooper Ellis",
+      "procedure": "TMJ Therapy",
+      "dentist": "Dr. Hart",
+      "date": "2025-02-22",
+      "status": "in_progress",
+      "notes": "Performing weekly adjustments.",
+      "cost": 520
+    }
+  ]
+}
