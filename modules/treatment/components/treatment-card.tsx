@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { Treatment } from "../types";
+import type { Treatment } from "../treatment-types";
 import { TreatmentStatusBadge } from "./treatment-status-badge";
 import { TreatmentStatusSelect } from "./treatment-status-select";
 

@@ -6,14 +6,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { STATUS_OPTIONS } from "../constants";
-import type { TreatmentStatusFilter } from "../types";
+import { STATUS_OPTIONS } from "../treatment-constants";
+import type { TreatmentStatusFilter } from "../treatment-types";
 
 interface TreatmentFiltersProps {
   search: string;
   onSearchChange: (search: string) => void;
   status: TreatmentStatusFilter;
   onStatusChange: (status: TreatmentStatusFilter) => void;
+  disabled?: boolean;
 }
 
 export function TreatmentFilters({
@@ -21,6 +22,7 @@ export function TreatmentFilters({
   onSearchChange,
   status,
   onStatusChange,
+  disabled = false,
 }: TreatmentFiltersProps) {
   return (
     <div className="flex flex-1 flex-col gap-3 md:flex-row md:items-center">
@@ -28,6 +30,7 @@ export function TreatmentFilters({
         placeholder="Search patients, procedures, dentists..."
         value={search}
         onChange={(event) => onSearchChange(event.target.value)}
+        disabled={disabled}
       />
 
       <Select
@@ -35,6 +38,7 @@ export function TreatmentFilters({
         onValueChange={(value) =>
           onStatusChange(value as TreatmentStatusFilter)
         }
+        disabled={disabled}
       >
         <SelectTrigger className="md:w-[220px]">
           <SelectValue placeholder="Filter by status" />
