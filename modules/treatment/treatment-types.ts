@@ -7,6 +7,7 @@
  * - Zod validates BE response and transforms to FE entity
  */
 
+import { createParser } from "nuqs";
 import { z } from "zod";
 
 /**
@@ -30,6 +31,17 @@ export const STATUS = {
 
 export type TreatmentStatus = (typeof STATUS)[keyof typeof STATUS]["value"];
 
+/**
+ * FE → BE status mapping
+ * Transforms camelCase status values back to snake_case for API requests
+ */
+export const FE_TO_BE_STATUS = {
+  scheduled: "scheduled",
+  inProgress: "in_progress",
+  completed: "completed",
+  cancelled: "cancelled",
+} as const;
+
 export const FILTER_STATUS = {
   ALL: { value: "all", label: "All" },
   ...STATUS,
@@ -37,6 +49,30 @@ export const FILTER_STATUS = {
 
 export type TreatmentStatusFilter =
   (typeof FILTER_STATUS)[keyof typeof FILTER_STATUS]["value"];
+
+// Query parameter keys for treatment filters
+export const TREATMENT_QUERY_PARAMS = {
+  SEARCH: "search",
+  STATUS: "status",
+} as const;
+
+// Zod schema for TreatmentStatusFilter - derived from constants to maintain single source of truth
+export const TreatmentStatusFilterSchema = z.enum([
+  FILTER_STATUS.ALL.value,
+  STATUS.SCHEDULED.value,
+  STATUS.IN_PROGRESS.value,
+  STATUS.COMPLETED.value,
+  STATUS.CANCELLED.value,
+] as const);
+
+// Custom nuqs parser using Zod validation
+export const parseAsTreatmentStatusFilter = createParser({
+  parse: (value) => {
+    const result = TreatmentStatusFilterSchema.safeParse(value);
+    return result.success ? result.data : null;
+  },
+  serialize: (value) => value,
+}).withDefault(FILTER_STATUS.ALL.value);
 
 /**
  * Zod schema validates BE response and transforms to FE entity
@@ -52,6 +88,7 @@ export const TreatmentSchema = z
     procedure: z.string(),
     dentist: z.string(),
     date: z.string(),
+    // Backend status values (snake_case) - must match keys in BE_TO_FE_STATUS
     status: z
       .enum(["scheduled", "in_progress", "completed", "cancelled"])
       .optional(),
