@@ -1,5 +1,5 @@
 import type { Treatment } from "../types";
-import { TreatmentCard } from "./TreatmentCard";
+import { TreatmentCard } from "./treatment-card";
 
 interface TreatmentsListProps {
   treatments: Treatment[];
