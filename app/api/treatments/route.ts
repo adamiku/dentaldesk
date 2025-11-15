@@ -39,7 +39,7 @@ export async function GET(request: Request) {
       const page = parsePositiveInteger(searchParams.get("page"), DEFAULT_PAGE);
       const pageSize = Math.min(
         parsePositiveInteger(searchParams.get("pageSize"), DEFAULT_PAGE_SIZE),
-        MAX_PAGE_SIZE
+        MAX_PAGE_SIZE,
       );
       const status = searchParams.get("status") as TreatmentStatus | "all";
       const filteredByStatus =
@@ -77,7 +77,7 @@ export async function GET(request: Request) {
     },
     {
       allowFailure: true,
-    }
+    },
   );
 }
 
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
           {
             message: `Missing required field: ${missingField}`,
           },
-          { status: 422 }
+          { status: 422 },
         );
       }
 
@@ -117,6 +117,6 @@ export async function POST(request: Request) {
     },
     {
       allowFailure: true,
-    }
+    },
   );
 }

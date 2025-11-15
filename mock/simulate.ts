@@ -18,7 +18,7 @@ interface SimulateOptions {
 
 export async function withSimulate<T>(
   task: () => Promise<T> | T,
-  options: SimulateOptions = {}
+  options: SimulateOptions = {},
 ) {
   const { allowFailure = false, message = "Simulation error." } = options;
 
