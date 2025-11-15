@@ -7,8 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { Treatment } from "../types";
-import { TreatmentStatusBadge } from "./TreatmentStatusBadge";
-import { TreatmentStatusSelect } from "./TreatmentStatusSelect";
+import { TreatmentStatusBadge } from "./treatment-status-badge";
+import { TreatmentStatusSelect } from "./treatment-status-select";
 
 interface TreatmentCardProps {
   treatment: Treatment;
