@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import type { Treatment } from "../types";
 import { FILTER_STATUS, type TreatmentStatusFilter } from "../types";
-import { AddTreatmentDialog } from "./AddTreatmentDialog";
-import { TreatmentFilters } from "./TreatmentFilters";
-import { TreatmentsList } from "./TreatmentsList";
+import { AddTreatmentDialog } from "./add-treatment-dialog";
+import { TreatmentFilters } from "./treatment-filters";
+import { TreatmentsList } from "./treatments-list";
 
 export function TreatmentsScreen() {
   const [treatments, setTreatments] = useState<Treatment[]>([]);

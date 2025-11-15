@@ -42,6 +42,11 @@
 
 ## Project Conventions
 
+### FileName Conventions
+
+- ✅ Use kebab-case for file names (e.g., `treatment-card.tsx`)
+- ✅ Use PascalCase for component names (e.g., `TreatmentCard`)
+
 ### Commit Messages
 
 Following [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) specification:
