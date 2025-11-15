@@ -1,7 +1,10 @@
 import { apiClient } from "@/lib/apiClient";
 
 import {
+  TreatmentSchema,
   TreatmentsResponseSchema,
+  type CreateTreatmentForm,
+  type Treatment,
   type TreatmentsResponse,
 } from "./treatment-types";
 
@@ -12,6 +15,14 @@ async function fetchTreatments(): Promise<TreatmentsResponse> {
   return TreatmentsResponseSchema.parse(data);
 }
 
+async function createTreatment(
+  formData: CreateTreatmentForm,
+): Promise<Treatment> {
+  const data = await apiClient.post(treatmentApi, formData);
+  return TreatmentSchema.parse(data);
+}
+
 export const treatmentApis = {
   fetchTreatments,
+  createTreatment,
 };
