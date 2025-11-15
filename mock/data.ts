@@ -3,16 +3,16 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-import type { Treatment } from "@/modules/treatment/types";
+import type { TreatmentBE } from "@/lib/types";
 import dataFile from "./data.json";
 
 type DataFile = {
-  treatments: Treatment[];
+  treatments: TreatmentBE[];
 };
 
 const DATA_FILE_PATH = path.join(process.cwd(), "mock", "data.json");
 
-const initialTreatments = [...(dataFile.treatments as Treatment[])];
+const initialTreatments = [...(dataFile.treatments as TreatmentBE[])];
 
 async function readDataFile(): Promise<DataFile> {
   const file = await fs.readFile(DATA_FILE_PATH, "utf-8");
@@ -37,7 +37,7 @@ export async function getTreatmentById(id: number) {
   return data.treatments.find((item) => item.id === id);
 }
 
-export async function insertTreatment(treatment: Treatment) {
+export async function insertTreatment(treatment: TreatmentBE) {
   const data = await readDataFile();
   const updated: DataFile = {
     treatments: [...data.treatments, treatment],
@@ -48,7 +48,10 @@ export async function insertTreatment(treatment: Treatment) {
   return treatment;
 }
 
-export async function updateTreatment(id: number, changes: Partial<Treatment>) {
+export async function updateTreatment(
+  id: number,
+  changes: Partial<TreatmentBE>,
+) {
   const data = await readDataFile();
   const index = data.treatments.findIndex((item) => item.id === id);
 
@@ -56,7 +59,7 @@ export async function updateTreatment(id: number, changes: Partial<Treatment>) {
     return undefined;
   }
 
-  const updatedTreatment: Treatment = {
+  const updatedTreatment: TreatmentBE = {
     ...data.treatments[index],
     ...changes,
   };

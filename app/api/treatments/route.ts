@@ -1,10 +1,5 @@
 import { NextResponse } from "next/server";
-
-import {
-  type Treatment,
-  FILTER_STATUS,
-  type TreatmentStatusFilter,
-} from "@/modules/treatment/types";
+import type { TreatmentBE, TreatmentStatus } from "@/lib/types";
 import {
   getNextTreatmentId,
   getTreatments,
@@ -45,9 +40,9 @@ export async function GET(request: Request) {
         parsePositiveInteger(searchParams.get("pageSize"), DEFAULT_PAGE_SIZE),
         MAX_PAGE_SIZE,
       );
-      const status = searchParams.get("status") as TreatmentStatusFilter;
+      const status = searchParams.get("status") as TreatmentStatus | "all";
       const filteredByStatus =
-        status && status !== FILTER_STATUS.ALL.value
+        status && status !== "all"
           ? treatments.filter((item) => item.status === status)
           : treatments;
 
@@ -104,13 +99,13 @@ export async function POST(request: Request) {
         );
       }
 
-      const treatment: Treatment = {
+      const treatment: TreatmentBE = {
         id: await getNextTreatmentId(),
         patient: payload.patient.trim(),
         procedure: payload.procedure.trim(),
         dentist: payload.dentist.trim(),
         date: payload.date,
-        status: (payload.status ?? "scheduled") as Treatment["status"],
+        status: (payload.status ?? "scheduled") as TreatmentBE["status"],
         notes: payload.notes,
         cost: typeof payload.cost === "number" ? payload.cost : undefined,
       };
