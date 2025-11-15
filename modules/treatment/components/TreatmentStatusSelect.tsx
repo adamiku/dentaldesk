@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { TreatmentStatus } from "@/lib/types";
+import { STATUS, type TreatmentStatus } from "../types";
 
 interface TreatmentStatusSelectProps {
   currentStatus?: TreatmentStatus;
@@ -26,14 +26,20 @@ export function TreatmentStatusSelect({
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Status</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked={currentStatus === "scheduled"}>
-          Scheduled
+        <DropdownMenuCheckboxItem
+          checked={currentStatus === STATUS.SCHEDULED.value}
+        >
+          {STATUS.SCHEDULED.label}
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={currentStatus === "in_progress"}>
-          In Progress
+        <DropdownMenuCheckboxItem
+          checked={currentStatus === STATUS.INPROGRESS.value}
+        >
+          {STATUS.INPROGRESS.label}
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={currentStatus === "completed"}>
-          Completed
+        <DropdownMenuCheckboxItem
+          checked={currentStatus === STATUS.COMPLETED.value}
+        >
+          {STATUS.COMPLETED.label}
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>

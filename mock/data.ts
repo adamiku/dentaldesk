@@ -3,7 +3,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-import type { Treatment } from "@/lib/types";
+import type { Treatment } from "@/modules/treatment/types";
 import dataFile from "./data.json";
 
 type DataFile = {

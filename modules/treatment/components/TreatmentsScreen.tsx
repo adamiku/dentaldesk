@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Treatment, TreatmentStatus } from "@/lib/types";
+import type { Treatment } from "../types";
+import { FILTER_STATUS, type TreatmentStatusFilter } from "../types";
 import { AddTreatmentDialog } from "./AddTreatmentDialog";
 import { TreatmentFilters } from "./TreatmentFilters";
 import { TreatmentsList } from "./TreatmentsList";
@@ -10,7 +11,9 @@ export function TreatmentsScreen() {
   const [treatments, setTreatments] = useState<Treatment[]>([]);
   const [filtered, setFiltered] = useState<Treatment[]>([]);
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<TreatmentStatus | "all">("all");
+  const [status, setStatus] = useState<TreatmentStatusFilter>(
+    FILTER_STATUS.ALL.value,
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [total, setTotal] = useState(0);
 
@@ -44,7 +47,7 @@ export function TreatmentsScreen() {
       });
     }
 
-    if (status !== "all") {
+    if (status !== FILTER_STATUS.ALL.value) {
       next = next.filter((item) => (item.status || "unknown") === status);
     }
     // eslint-disable-next-line
