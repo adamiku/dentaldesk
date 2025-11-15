@@ -53,6 +53,10 @@ Automated code formatting using Prettier + EditorConfig:
   - Format on save: enabled (Windsurf/VS Code)
 - **Exclusions** (`.prettierignore`):
   - `components/**` - shadcn/ui components kept in original style
+- **Pre-commit Hook** (`simple-git-hooks` + `lint-staged`):
+  - Automatically runs on staged files before commit
+  - ESLint --fix for `.ts` and `.tsx` files
+  - Prettier format for all staged files
 - **Scripts**:
   - `npm run format` - Format all files
   - `npm run format:check` - Check formatting (CI)
