@@ -25,6 +25,21 @@
 - ✅ Maintained type safety throughout refactoring
 - ✅ Applied state colocation principles - kept state at appropriate level (screen level)
 
+### 3. Type Safety Improvements
+
+- ✅ Consolidated status constants into single source of truth (`modules/treatment/types.ts`)
+  - Usage: `STATUS.SCHEDULED.value` for values, `STATUS.SCHEDULED.label` for display
+- ✅ Extended pattern to `FILTER_STATUS` by spreading `STATUS` and adding `ALL` option
+- ✅ Removed underscore from constant names (e.g., `IN_PROGRESS` → `INPROGRESS`)
+  - Keeps key names cleaner while maintaining `in_progress` as the actual value
+- ✅ Made `STATUS_OPTIONS` array programmatic (`modules/treatment/constants.ts`)
+  - Uses `Object.values(FILTER_STATUS).map()` to automatically derive options
+  - Adding new status to `STATUS` automatically updates all dependent arrays
+  - Eliminates manual maintenance of option lists
+- ✅ Type derivation from constants using TypeScript utilities
+  - `type TreatmentStatus = (typeof STATUS)[keyof typeof STATUS]["value"]`
+  - Ensures type safety while keeping single source of truth
+
 ## Project Conventions
 
 ### Commit Messages

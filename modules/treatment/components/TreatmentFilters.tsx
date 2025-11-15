@@ -6,14 +6,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { TreatmentStatus } from "@/lib/types";
 import { STATUS_OPTIONS } from "../constants";
+import type { TreatmentStatusFilter } from "../types";
 
 interface TreatmentFiltersProps {
   search: string;
   onSearchChange: (search: string) => void;
-  status: TreatmentStatus | "all";
-  onStatusChange: (status: TreatmentStatus | "all") => void;
+  status: TreatmentStatusFilter;
+  onStatusChange: (status: TreatmentStatusFilter) => void;
 }
 
 export function TreatmentFilters({
@@ -33,7 +33,7 @@ export function TreatmentFilters({
       <Select
         value={status}
         onValueChange={(value) =>
-          onStatusChange(value as TreatmentStatus | "all")
+          onStatusChange(value as TreatmentStatusFilter)
         }
       >
         <SelectTrigger className="md:w-[220px]">

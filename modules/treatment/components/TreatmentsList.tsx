@@ -1,4 +1,4 @@
-import type { Treatment } from "@/lib/types";
+import type { Treatment } from "../types";
 import { TreatmentCard } from "./TreatmentCard";
 
 interface TreatmentsListProps {

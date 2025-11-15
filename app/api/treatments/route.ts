@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
-import type { Treatment, TreatmentStatus } from "@/lib/types";
+import {
+  type Treatment,
+  FILTER_STATUS,
+  type TreatmentStatusFilter,
+} from "@/modules/treatment/types";
 import {
   getNextTreatmentId,
   getTreatments,
@@ -41,9 +45,9 @@ export async function GET(request: Request) {
         parsePositiveInteger(searchParams.get("pageSize"), DEFAULT_PAGE_SIZE),
         MAX_PAGE_SIZE,
       );
-      const status = searchParams.get("status") as TreatmentStatus | "all";
+      const status = searchParams.get("status") as TreatmentStatusFilter;
       const filteredByStatus =
-        status && status !== "all"
+        status && status !== FILTER_STATUS.ALL.value
           ? treatments.filter((item) => item.status === status)
           : treatments;
 
