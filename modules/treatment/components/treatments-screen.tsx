@@ -1,40 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Treatment } from "../types";
-import { FILTER_STATUS, type TreatmentStatusFilter } from "../types";
+import {
+  FILTER_STATUS,
+  type TreatmentStatusFilter,
+  type Treatment,
+} from "../treatment-types";
 import { AddTreatmentDialog } from "./add-treatment-dialog";
 import { TreatmentFilters } from "./treatment-filters";
 import { TreatmentsList } from "./treatments-list";
+import { useTreatments } from "../treatment-hooks";
 
 export function TreatmentsScreen() {
-  const [treatments, setTreatments] = useState<Treatment[]>([]);
   const [filtered, setFiltered] = useState<Treatment[]>([]);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<TreatmentStatusFilter>(
     FILTER_STATUS.ALL.value,
   );
-  const [isLoading, setIsLoading] = useState(false);
-  const [total, setTotal] = useState(0);
+
+  const { data, isLoading, isError, refetch } = useTreatments();
 
   useEffect(() => {
-    async function load() {
-      setIsLoading(true);
-      const response = await fetch("/api/treatments");
-      const data = await response.json();
-      const items = data.data ?? [];
-
-      setTreatments(items);
-      setFiltered(items);
-      setTotal(items.length);
-      setIsLoading(false);
-    }
-
-    load();
-  }, []);
-
-  useEffect(() => {
-    let next = [...treatments];
+    let next = [...(data?.data ?? [])];
 
     if (search.trim()) {
       const query = search.toLowerCase();
@@ -52,7 +39,7 @@ export function TreatmentsScreen() {
     }
     // eslint-disable-next-line
     setFiltered(next);
-  }, [search, status, treatments]);
+  }, [search, status, data?.data]);
 
   return (
     <div className="container mx-auto flex flex-col gap-6 py-10">
@@ -70,17 +57,23 @@ export function TreatmentsScreen() {
             onSearchChange={setSearch}
             status={status}
             onStatusChange={setStatus}
+            disabled={isLoading}
           />
 
           <AddTreatmentDialog />
         </div>
 
         <div className="text-sm text-muted-foreground">
-          Showing {filtered.length} of {total} treatments
+          Showing {filtered.length} of {data?.total ?? 0} treatments
         </div>
       </section>
 
-      <TreatmentsList treatments={filtered} isLoading={isLoading} />
+      <TreatmentsList
+        treatments={filtered}
+        isLoading={isLoading}
+        isError={isError}
+        refetch={refetch}
+      />
     </div>
   );
 }

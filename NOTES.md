@@ -40,6 +40,57 @@
   - `type TreatmentStatus = (typeof STATUS)[keyof typeof STATUS]["value"]`
   - Ensures type safety while keeping single source of truth
 
+### 4. Data Fetching Implementation
+
+- ✅ **TanStack Query Integration**
+  - Chose TanStack Query over Server Components/Server Actions for:
+    - Better client-side interactivity with filters and search (avoiding server round-trips)
+    - Built-in request cancellation when filters change or user navigates away
+    - Automatic retry logic (configured to 2 retries) for handling unstable API
+    - Smart client-side caching with stale-while-revalidate strategy (`staleTime: 60s`)
+    - Optimistic updates support (needed for Point 6: Status Updates)
+  - Configured `QueryClient` in `app/providers.tsx` with sensible defaults
+  - Disabled `refetchOnWindowFocus` to reduce unnecessary network requests
+
+- ✅ **Runtime Type Safety with Zod**
+  - Created Zod schemas for API response validation (`TreatmentSchema`, `TreatmentsResponseSchema`)
+  - **BE → FE Entity Transformation** using Zod `.transform()`:
+    - Status property: `"in_progress"` (snake_case) → `"inProgress"` (camelCase)
+    - Notes cleanup: empty string → `undefined` for cleaner optional handling
+    - Cost field: passed through for BE compatibility but documented as not displayed in UI
+  - Transformation happens at API boundary (`modules/treatment/api.ts`), ensuring only clean FE entities reach React Query cache
+  - Separated concerns:
+    - `TreatmentBE` (in `lib/types.ts`): Backend entity used by API routes and mock layer
+    - `Treatment` (derived from Zod schema): Frontend entity used by components
+    - `BE_TO_FE_STATUS` mapping for status transformation
+
+- ✅ **Centralized API Client** (`lib/apiClient.ts`)
+  - Single source for all HTTP communication
+  - Benefits:
+    - Easy to modify base URLs and API versioning
+    - Centralized error handling with custom `ApiError` class
+    - Future-ready for interceptors (auth tokens, request/response logging)
+    - Consistent headers across all requests
+    - Type-safe HTTP methods (`get`, `post`, `patch`, `delete`)
+  - Query parameter support via `params` option
+
+- ✅ **Query Key Factory Pattern** (`modules/treatment/queryKeys.ts`)
+  - Hierarchical structure: `["treatments"]` → `["treatments", "detail"]` → `["treatments", "detail", id]`
+  - Benefits:
+    - Granular cache invalidation (invalidate all treatments vs specific treatment)
+    - Type-safe query keys with `as const`
+    - Maintainable structure that scales with more entities
+    - Clear naming convention for different query types
+
+- ✅ **UX Improvements**
+  - Loading states: Skeleton components (`TreatmentCardSkeleton`) for better perceived performance
+  - Error states: User-friendly error messages with "Try again" button using `refetch()`
+  - Disabled states: Filters disabled during loading to prevent race conditions
+  - Built-in features from TanStack Query:
+    - Request deduplication (multiple components requesting same data)
+    - Background refetching for fresh data
+    - Automatic garbage collection of unused cache entries
+
 ## Project Conventions
 
 ### FileName Conventions

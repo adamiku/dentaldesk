@@ -1,4 +1,4 @@
-import { FILTER_STATUS, type TreatmentStatusFilter } from "./types";
+import { FILTER_STATUS, type TreatmentStatusFilter } from "./treatment-types";
 
 export const STATUS_OPTIONS: Array<{
   label: string;

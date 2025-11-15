@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import type { TreatmentStatus } from "../types";
+import type { TreatmentStatus } from "../treatment-types";
 
 interface TreatmentStatusBadgeProps {
   status?: TreatmentStatus;
