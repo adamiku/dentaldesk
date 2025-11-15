@@ -91,6 +91,43 @@
     - Background refetching for fresh data
     - Automatic garbage collection of unused cache entries
 
+### 5. Search and Status Filters with URL State
+
+- ✅ **nuqs Integration for Type-Safe URL State Management**
+  - Chose nuqs over React state for URL as single source of truth:
+    - Shareable URLs with filters preserved
+    - Browser back/forward navigation works naturally
+    - No state management boilerplate
+    - Type-safe query parameter parsing
+  - Custom Zod-based parser for `TreatmentStatusFilter` (`parseAsTreatmentStatusFilter`):
+    - Validates URL params at runtime using existing Zod schemas
+    - Returns properly typed union: `"all" | "scheduled" | "inProgress" | "completed" | "cancelled"`
+    - Falls back to default value for invalid params
+
+- ✅ **Debounced Search for Better UX**
+  - Created `useDebouncedQueryState` custom hook (`lib/hooks/use-debounced-query-state.ts`):
+    - Returns three values: `[inputValue, setInputValue, debouncedValue]`
+    - `inputValue` updates immediately for responsive input field
+    - `debouncedValue` updates after 400ms delay for API queries
+    - Prevents excessive API requests while user is typing
+    - Syncs with URL param changes from browser navigation
+  - Used `useDebounce` helper hook for reusable debounce logic
+  - Input field maintains focus during API requests (not disabled during loading)
+
+- ✅ **Centralized Query Parameter Constants**
+  - Created `TREATMENT_QUERY_PARAMS` in `modules/treatment/treatment-types.ts`:
+    - `SEARCH: "search"` and `STATUS: "status"`
+    - Single source of truth for query param keys
+    - Module-specific to prevent collisions
+    - Easy to refactor if param names need to change
+  - Follows existing module architecture pattern
+
+- ✅ **Server-Side Filtering**
+  - Updated `fetchTreatments` to accept filter params (`search`, `status`)
+  - Query keys include filters for proper cache segmentation
+  - TanStack Query automatically refetches when filter values change
+  - Better performance than client-side filtering for large datasets
+
 ## Project Conventions
 
 ### FileName Conventions
