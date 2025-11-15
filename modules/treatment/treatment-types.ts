@@ -78,3 +78,17 @@ export const TreatmentsResponseSchema = z.object({
 
 export type Treatment = z.infer<typeof TreatmentSchema>;
 export type TreatmentsResponse = z.infer<typeof TreatmentsResponseSchema>;
+
+/**
+ * Form schema for creating a new treatment
+ * Validates user input before sending to API
+ */
+export const CreateTreatmentFormSchema = z.object({
+  patient: z.string().min(1, "Patient name is required"),
+  procedure: z.string().min(1, "Procedure is required"),
+  dentist: z.string().min(1, "Dentist name is required"),
+  date: z.string().min(1, "Date is required"),
+  notes: z.string().optional(),
+});
+
+export type CreateTreatmentForm = z.infer<typeof CreateTreatmentFormSchema>;
