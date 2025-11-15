@@ -10,7 +10,7 @@ function parseId(value: string) {
 
 export async function GET(
   _request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const paramsData = await params;
   const id = parseId(paramsData.id);
@@ -18,7 +18,7 @@ export async function GET(
   if (id === null) {
     return NextResponse.json(
       { message: "Invalid treatment id." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -27,7 +27,7 @@ export async function GET(
   if (!treatment) {
     return NextResponse.json(
       { message: "Treatment not found." },
-      { status: 404 }
+      { status: 404 },
     );
   }
 
@@ -36,7 +36,7 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const paramsData = await params;
   const id = parseId(paramsData.id);
@@ -44,7 +44,7 @@ export async function PATCH(
   if (id === null) {
     return NextResponse.json(
       { message: "Invalid treatment id." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -55,7 +55,7 @@ export async function PATCH(
       if (!payload || typeof payload.status !== "string") {
         return NextResponse.json(
           { message: "Status is required." },
-          { status: 422 }
+          { status: 422 },
         );
       }
 
@@ -64,7 +64,7 @@ export async function PATCH(
       if (!updated) {
         return NextResponse.json(
           { message: "Treatment not found." },
-          { status: 404 }
+          { status: 404 },
         );
       }
 
@@ -72,6 +72,6 @@ export async function PATCH(
     },
     {
       allowFailure: true,
-    }
+    },
   );
 }

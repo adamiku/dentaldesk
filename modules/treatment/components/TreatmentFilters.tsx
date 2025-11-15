@@ -32,7 +32,9 @@ export function TreatmentFilters({
 
       <Select
         value={status}
-        onValueChange={(value) => onStatusChange(value as TreatmentStatus | "all")}
+        onValueChange={(value) =>
+          onStatusChange(value as TreatmentStatus | "all")
+        }
       >
         <SelectTrigger className="md:w-[220px]">
           <SelectValue placeholder="Filter by status" />
