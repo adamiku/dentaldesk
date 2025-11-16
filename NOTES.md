@@ -128,6 +128,17 @@
   - TanStack Query automatically refetches when filter values change
   - Better performance than client-side filtering for large datasets
 
+### 6. Pagination
+
+- ✅ **Traditional Pagination over Infinite Scroll**
+  - Chose pagination instead of lazy loading/infinite scroll for:
+    - **Better accessibility**: Clear page boundaries, screen reader friendly
+    - **Keyboard navigation**: Users can tab through page numbers
+    - **Direct navigation**: Users can jump to specific pages
+    - **Shareability**: URL params make it easy to share exact page/filter combinations
+    - **Cognitive clarity**: Users know exactly where they are in the dataset
+    - **Simpler implementation**: Less complex than intersection observers and virtual scrolling
+
 ## Project Conventions
 
 ### FileName Conventions

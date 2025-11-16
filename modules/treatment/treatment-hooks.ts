@@ -1,14 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { treatmentApis } from "./treatment-api";
 import { TREATMENT_QUERY_KEYS } from "./treatment-queryKeys";
-import type { TreatmentStatusFilter } from "./treatment-types";
+import type { TreatmentFilters } from "./treatment-types";
 
-interface UseTreatmentsParams {
-  search?: string;
-  status?: TreatmentStatusFilter;
-}
-
-export function useTreatments(params?: UseTreatmentsParams) {
+export function useTreatments(params?: TreatmentFilters) {
   return useQuery({
     queryKey: TREATMENT_QUERY_KEYS.list(params),
     queryFn: () => treatmentApis.fetchTreatments(params),
