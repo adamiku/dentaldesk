@@ -7,7 +7,7 @@
  * - Zod validates BE response and transforms to FE entity
  */
 
-import { createParser } from "nuqs";
+import { createParser, parseAsInteger } from "nuqs";
 import { z } from "zod";
 
 /**
@@ -50,11 +50,29 @@ export const FILTER_STATUS = {
 export type TreatmentStatusFilter =
   (typeof FILTER_STATUS)[keyof typeof FILTER_STATUS]["value"];
 
-// Query parameter keys for treatment filters
+// Query parameter keys for treatment filters and pagination
 export const TREATMENT_QUERY_PARAMS = {
   SEARCH: "search",
   STATUS: "status",
+  PAGE: "page",
+  PAGE_SIZE: "pageSize",
 } as const;
+
+// Pagination defaults
+export const PAGINATION_DEFAULTS = {
+  PAGE: 1,
+  PAGE_SIZE: 10,
+} as const;
+
+export const PAGE_SIZE_OPTIONS = [10, 20, 30, 40, 50] as const;
+
+// Shared filter/params interface used across API, hooks, and query keys
+export interface TreatmentFilters {
+  search?: string;
+  status?: TreatmentStatusFilter;
+  page?: number;
+  pageSize?: number;
+}
 
 // Zod schema for TreatmentStatusFilter - derived from constants to maintain single source of truth
 export const TreatmentStatusFilterSchema = z.enum([
@@ -73,6 +91,10 @@ export const parseAsTreatmentStatusFilter = createParser({
   },
   serialize: (value) => value,
 }).withDefault(FILTER_STATUS.ALL.value);
+export const parseAsPage = parseAsInteger.withDefault(PAGINATION_DEFAULTS.PAGE);
+export const parseAsPageSize = parseAsInteger.withDefault(
+  PAGINATION_DEFAULTS.PAGE_SIZE,
+);
 
 /**
  * Zod schema validates BE response and transforms to FE entity

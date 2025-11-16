@@ -1,9 +1,4 @@
-import type { TreatmentStatusFilter } from "./treatment-types";
-
-interface TreatmentFilters {
-  search?: string;
-  status?: TreatmentStatusFilter;
-}
+import type { TreatmentFilters } from "./treatment-types";
 
 export const TREATMENT_QUERY_KEYS = {
   all: ["treatments"] as const,
