@@ -1,5 +1,9 @@
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
-import type { Treatment } from "../treatment-types";
+
+import type { Treatment, TreatmentStatus } from "../treatment-types";
+import { useUpdateTreatmentStatus } from "../treatment-hooks";
 import { TreatmentCard } from "./treatment-card";
 import { TreatmentCardSkeleton } from "./treatment-card-skeleton";
 
@@ -16,6 +20,32 @@ export function TreatmentsList({
   isError,
   refetch,
 }: TreatmentsListProps) {
+  const updateStatusMutation = useUpdateTreatmentStatus();
+
+  const handleStatusChange = (
+    treatmentId: number,
+    newStatus: TreatmentStatus,
+  ) => {
+    updateStatusMutation.mutate(
+      { id: treatmentId, status: newStatus },
+      {
+        onSuccess: () => {
+          toast.success("Status updated successfully");
+        },
+        onError: () => {
+          toast.error("Failed to update status. Please try again.");
+        },
+      },
+    );
+  };
+
+  const isUpdating = (treatmentId: number) => {
+    return (
+      updateStatusMutation.isPending &&
+      updateStatusMutation.variables?.id === treatmentId
+    );
+  };
+
   if (isLoading) {
     return (
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -46,7 +76,12 @@ export function TreatmentsList({
   return (
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       {treatments.map((treatment) => (
-        <TreatmentCard key={treatment.id} treatment={treatment} />
+        <TreatmentCard
+          key={treatment.id}
+          treatment={treatment}
+          onStatusChange={handleStatusChange}
+          isUpdating={isUpdating(treatment.id)}
+        />
       ))}
     </div>
   );

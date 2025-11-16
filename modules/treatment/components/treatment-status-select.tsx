@@ -10,37 +10,44 @@ import {
 import { STATUS, type TreatmentStatus } from "../treatment-types";
 
 interface TreatmentStatusSelectProps {
+  treatmentId: number;
   currentStatus?: TreatmentStatus;
+  onStatusChange: (treatmentId: number, newStatus: TreatmentStatus) => void;
+  disabled?: boolean;
 }
 
 export function TreatmentStatusSelect({
+  treatmentId,
   currentStatus,
+  onStatusChange,
+  disabled = false,
 }: TreatmentStatusSelectProps) {
+  const statusOptions = Object.values(STATUS);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" disabled={disabled}>
           Update status
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Status</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem
-          checked={currentStatus === STATUS.SCHEDULED.value}
-        >
-          {STATUS.SCHEDULED.label}
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={currentStatus === STATUS.IN_PROGRESS.value}
-        >
-          {STATUS.IN_PROGRESS.label}
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={currentStatus === STATUS.COMPLETED.value}
-        >
-          {STATUS.COMPLETED.label}
-        </DropdownMenuCheckboxItem>
+        {statusOptions.map((status) => (
+          <DropdownMenuCheckboxItem
+            key={status.value}
+            checked={currentStatus === status.value}
+            onCheckedChange={() => {
+              if (currentStatus !== status.value) {
+                onStatusChange(treatmentId, status.value);
+              }
+            }}
+            disabled={disabled || currentStatus === status.value}
+          >
+            {status.label}
+          </DropdownMenuCheckboxItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

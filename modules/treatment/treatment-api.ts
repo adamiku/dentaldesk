@@ -47,7 +47,20 @@ async function createTreatment(
   return TreatmentSchema.parse(data);
 }
 
+async function updateTreatmentStatus(
+  id: number,
+  status: TreatmentStatus,
+): Promise<Treatment> {
+  const backendStatus = FE_TO_BE_STATUS[status];
+
+  const data = await apiClient.patch(`${treatmentApi}/${id}`, {
+    status: backendStatus,
+  });
+  return TreatmentSchema.parse(data);
+}
+
 export const treatmentApis = {
   fetchTreatments,
   createTreatment,
+  updateTreatmentStatus,
 };

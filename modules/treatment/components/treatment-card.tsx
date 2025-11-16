@@ -6,15 +6,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { Treatment } from "../treatment-types";
+import type { Treatment, TreatmentStatus } from "../treatment-types";
 import { TreatmentStatusBadge } from "./treatment-status-badge";
 import { TreatmentStatusSelect } from "./treatment-status-select";
 
 interface TreatmentCardProps {
   treatment: Treatment;
+  onStatusChange: (treatmentId: number, newStatus: TreatmentStatus) => void;
+  isUpdating: boolean;
 }
 
-export function TreatmentCard({ treatment }: TreatmentCardProps) {
+export function TreatmentCard({
+  treatment,
+  onStatusChange,
+  isUpdating,
+}: TreatmentCardProps) {
   return (
     <Card className="shadow-sm">
       <CardHeader>
@@ -41,7 +47,12 @@ export function TreatmentCard({ treatment }: TreatmentCardProps) {
         ) : null}
       </CardContent>
       <CardFooter>
-        <TreatmentStatusSelect currentStatus={treatment.status} />
+        <TreatmentStatusSelect
+          treatmentId={treatment.id}
+          currentStatus={treatment.status}
+          onStatusChange={onStatusChange}
+          disabled={isUpdating}
+        />
       </CardFooter>
     </Card>
   );
