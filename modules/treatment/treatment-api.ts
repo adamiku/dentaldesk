@@ -11,7 +11,7 @@ import {
   type TreatmentsResponse,
 } from "./treatment-types";
 
-const treatmentApi = "/treatments";
+export const treatmentApiPath = "/treatments";
 
 /**
  * Type guard to check if a TreatmentStatusFilter is a valid TreatmentStatus (excludes "all")
@@ -34,7 +34,7 @@ async function fetchTreatments(
     pageSize: params?.pageSize,
   };
 
-  const data = await apiClient.get(treatmentApi, {
+  const data = await apiClient.get(treatmentApiPath, {
     params: backendParams,
   });
   return TreatmentsResponseSchema.parse(data);
@@ -43,7 +43,7 @@ async function fetchTreatments(
 async function createTreatment(
   formData: CreateTreatmentForm,
 ): Promise<Treatment> {
-  const data = await apiClient.post(treatmentApi, formData);
+  const data = await apiClient.post(treatmentApiPath, formData);
   return TreatmentSchema.parse(data);
 }
 
@@ -53,7 +53,7 @@ async function updateTreatmentStatus(
 ): Promise<Treatment> {
   const backendStatus = FE_TO_BE_STATUS[status];
 
-  const data = await apiClient.patch(`${treatmentApi}/${id}`, {
+  const data = await apiClient.patch(`${treatmentApiPath}/${id}`, {
     status: backendStatus,
   });
   return TreatmentSchema.parse(data);
@@ -63,4 +63,5 @@ export const treatmentApis = {
   fetchTreatments,
   createTreatment,
   updateTreatmentStatus,
+  treatmentApiPath,
 };

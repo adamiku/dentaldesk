@@ -48,7 +48,10 @@ export function TreatmentsList({
 
   if (isLoading) {
     return (
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div
+        className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+        data-testid="treatments-loading"
+      >
         {Array.from({ length: 9 }).map((_, index) => (
           <TreatmentCardSkeleton key={index} />
         ))}
