@@ -1,4 +1,9 @@
 {
+  "errors": {
+    "title": "Valami hiba történt",
+    "description": "Váratlan hiba történt",
+    "tryAgain": "Próbáld újra"
+  },
   "treatments": {
     "noTreatmentsFound": "Nem található kezelés",
     "description": "Kövesse nyomon a fogászati kezeléseket és azok állapotát.",
