@@ -6,5 +6,12 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
     environment: "jsdom",
+    setupFiles: ["./vitest.polyfills.ts", "./vitest.setup.ts"],
+    environmentOptions: {
+      jsdom: {
+        url: "http://localhost:3000",
+      },
+    },
+    globals: true,
   },
 });
