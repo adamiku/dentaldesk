@@ -1,0 +1,28 @@
+{
+  "treatments": {
+    "noTreatmentsFound": "No treatments found",
+    "description": "Track dental treatments and their status.",
+    "title": "DentalDesk",
+    "addTreatment": "Add treatment",
+    "treatmentCreatedSuccessfully": "Treatment created successfully",
+    "failedToCreateTreatment": "Failed to create treatment: {{error}}",
+    "unexpectedError": "An unexpected error occurred",
+    "patient": "Patient",
+    "procedure": "Procedure",
+    "dentist": "Dentist",
+    "date": "Date",
+    "notes": "Notes (optional)",
+    "saving": "Saving...",
+    "saveTreatment": "Save treatment",
+    "itemsPerPage": "Items per page",
+    "search": "Search patients, procedures, dentists...",
+    "filterByStatus": "Filter by status",
+    "unknown": "Unknown",
+    "updateStatus": "Update status",
+    "statusUpdatedSuccessfully": "Status updated successfully",
+    "failedToUpdateStatus": "Failed to update status",
+    "somethingWentWrong": "Something went wrong",
+    "retry": "Retry",
+    "status": "Status"
+  }
+}

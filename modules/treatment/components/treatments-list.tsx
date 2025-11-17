@@ -6,6 +6,7 @@ import type { Treatment, TreatmentStatus } from "../treatment-types";
 import { useUpdateTreatmentStatus } from "../treatment-hooks";
 import { TreatmentCard } from "./treatment-card";
 import { TreatmentCardSkeleton } from "./treatment-card-skeleton";
+import { useTranslations } from "next-intl";
 
 interface TreatmentsListProps {
   treatments: Treatment[];
@@ -21,6 +22,7 @@ export function TreatmentsList({
   refetch,
 }: TreatmentsListProps) {
   const updateStatusMutation = useUpdateTreatmentStatus();
+  const t = useTranslations("treatments");
 
   const handleStatusChange = (
     treatmentId: number,
@@ -30,10 +32,10 @@ export function TreatmentsList({
       { id: treatmentId, status: newStatus },
       {
         onSuccess: () => {
-          toast.success("Status updated successfully");
+          toast.success(t("statusUpdatedSuccessfully"));
         },
         onError: () => {
-          toast.error("Failed to update status. Please try again.");
+          toast.error(t("failedToUpdateStatus"));
         },
       },
     );
@@ -62,8 +64,8 @@ export function TreatmentsList({
   if (isError) {
     return (
       <div className="flex flex-col gap-2 items-center rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">
-        Something went wrong
-        <Button onClick={refetch}>Retry</Button>
+        {t("somethingWentWrong")}
+        <Button onClick={refetch}>{t("retry")}</Button>
       </div>
     );
   }
@@ -71,7 +73,7 @@ export function TreatmentsList({
   if (treatments.length === 0) {
     return (
       <div className="rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">
-        No treatments found
+        {t("noTreatmentsFound")}
       </div>
     );
   }

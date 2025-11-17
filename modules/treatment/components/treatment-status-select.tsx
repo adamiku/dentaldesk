@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { STATUS, type TreatmentStatus } from "../treatment-types";
+import { useTranslations } from "next-intl";
 
 interface TreatmentStatusSelectProps {
   treatmentId: number;
@@ -23,16 +24,16 @@ export function TreatmentStatusSelect({
   disabled = false,
 }: TreatmentStatusSelectProps) {
   const statusOptions = Object.values(STATUS);
-
+  const t = useTranslations("treatments");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" disabled={disabled}>
-          Update status
+          {t("updateStatus")}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Status</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("updateStatus")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {statusOptions.map((status) => (
           <DropdownMenuCheckboxItem

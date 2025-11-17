@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/select";
 
 import { PAGE_SIZE_OPTIONS } from "../treatment-types";
+import { useTranslations } from "next-intl";
 
 interface PageSizeSelectorProps {
   value: number;
@@ -19,9 +20,11 @@ export function PageSizeSelector({
   onChange,
   disabled = false,
 }: PageSizeSelectorProps) {
+  const t = useTranslations("treatments");
+
   return (
     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-      <span>Items per page:</span>
+      <span>{t("itemsPerPage")}</span>
       <Select
         value={value.toString()}
         onValueChange={(val) => onChange(Number(val))}

@@ -9,6 +9,7 @@ import {
 import type { Treatment, TreatmentStatus } from "../treatment-types";
 import { TreatmentStatusBadge } from "./treatment-status-badge";
 import { TreatmentStatusSelect } from "./treatment-status-select";
+import { useTranslations } from "next-intl";
 
 interface TreatmentCardProps {
   treatment: Treatment;
@@ -21,6 +22,8 @@ export function TreatmentCard({
   onStatusChange,
   isUpdating,
 }: TreatmentCardProps) {
+  const t = useTranslations("treatments");
+
   return (
     <Card className="shadow-sm">
       <CardHeader>
@@ -29,15 +32,15 @@ export function TreatmentCard({
       </CardHeader>
       <CardContent className="space-y-3">
         <div>
-          <div className="text-xs text-muted-foreground">Dentist</div>
+          <div className="text-xs text-muted-foreground">{t("dentist")}</div>
           <div className="text-sm font-medium">{treatment.dentist}</div>
         </div>
         <div>
-          <div className="text-xs text-muted-foreground">Date</div>
+          <div className="text-xs text-muted-foreground">{t("date")}</div>
           <div className="text-sm font-medium">{treatment.date}</div>
         </div>
         <div>
-          <div className="text-xs text-muted-foreground">Status</div>
+          <div className="text-xs text-muted-foreground">{t("status")}</div>
           <TreatmentStatusBadge status={treatment.status} />
         </div>
         {treatment.notes ? (
