@@ -1,4 +1,9 @@
 {
+  "errors": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred",
+    "tryAgain": "Try again"
+  },
   "treatments": {
     "noTreatmentsFound": "No treatments found",
     "description": "Track dental treatments and their status.",
