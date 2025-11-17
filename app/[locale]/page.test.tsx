@@ -1,19 +1,21 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { render, screen, waitFor } from "../test-utils/test-utils";
+import { render, screen, waitFor } from "../../test-utils/test-utils";
 import { HttpResponse, delay } from "msw";
-import server, { mockRequest } from "../test-utils/server";
-import { AssetGenerator } from "../test-utils/assetGenerator";
+import server, { mockRequest } from "../../test-utils/server";
+import { AssetGenerator } from "../../test-utils/assetGenerator";
 import { treatmentApis } from "@/modules/treatment/treatment-api";
 import Page from "./page";
 
 describe("TreatmentsPage", () => {
+  const mockParams = Promise.resolve({ locale: "en" });
+
   beforeEach(() => {
     server.resetHandlers();
   });
 
   describe("Initial Render", () => {
     it("should render the page heading", async () => {
-      render(<Page />);
+      render(await Page({ params: mockParams }));
 
       expect(
         screen.getByRole("heading", { level: 1, name: "DentalDesk" }),
@@ -30,7 +32,7 @@ describe("TreatmentsPage", () => {
         AssetGenerator.getMockTreatmentsResponse(),
       );
 
-      render(<Page />);
+      render(await Page({ params: mockParams }));
 
       expect(
         screen.getByPlaceholderText("Search patients, procedures, dentists..."),
@@ -53,7 +55,7 @@ describe("TreatmentsPage", () => {
         return HttpResponse.json(AssetGenerator.getMockTreatmentsResponse());
       });
 
-      render(<Page />);
+      render(await Page({ params: mockParams }));
 
       expect(screen.queryByText("John Doe")).not.toBeInTheDocument();
       expect(screen.getByTestId("treatments-loading")).toBeInTheDocument();
@@ -73,7 +75,7 @@ describe("TreatmentsPage", () => {
       const mockResponse = AssetGenerator.getMockTreatmentsResponse();
       mockRequest("get", treatmentApis.treatmentApiPath, mockResponse);
 
-      render(<Page />);
+      render(await Page({ params: mockParams }));
 
       await waitFor(() => {
         expect(screen.getByText("John Doe")).toBeInTheDocument();
@@ -95,7 +97,7 @@ describe("TreatmentsPage", () => {
         totalPages: 0,
       });
 
-      render(<Page />);
+      render(await Page({ params: mockParams }));
 
       await waitFor(() => {
         expect(screen.getByText("No treatments found")).toBeInTheDocument();
@@ -112,7 +114,7 @@ describe("TreatmentsPage", () => {
         );
       });
 
-      render(<Page />);
+      render(await Page({ params: mockParams }));
 
       await waitFor(() => {
         expect(screen.getByText("Something went wrong")).toBeInTheDocument();
@@ -137,7 +139,7 @@ describe("TreatmentsPage", () => {
         return HttpResponse.json(AssetGenerator.getMockTreatmentsResponse());
       });
 
-      const { user } = render(<Page />);
+      const { user } = render(await Page({ params: mockParams }));
 
       await waitFor(() => {
         expect(screen.getByText("Something went wrong")).toBeInTheDocument();
@@ -175,7 +177,7 @@ describe("TreatmentsPage", () => {
         return HttpResponse.json(AssetGenerator.getMockTreatmentsResponse());
       });
 
-      const { user } = render(<Page />);
+      const { user } = render(await Page({ params: mockParams }));
 
       await waitFor(() => {
         expect(screen.getByText("John Doe")).toBeInTheDocument();
@@ -216,7 +218,7 @@ describe("TreatmentsPage", () => {
         );
       });
 
-      const { user } = render(<Page />);
+      const { user } = render(await Page({ params: mockParams }));
 
       await waitFor(() => {
         expect(screen.getByText("John Doe")).toBeInTheDocument();

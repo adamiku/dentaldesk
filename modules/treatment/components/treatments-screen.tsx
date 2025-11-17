@@ -18,6 +18,8 @@ import { PageSizeSelector } from "./page-size-selector";
 import { TreatmentFilters } from "./treatment-filters";
 import { TreatmentsList } from "./treatments-list";
 import { TreatmentsPagination } from "./treatments-pagination";
+import { useTranslations } from "next-intl";
+import { LanguageSelector } from "@/components/language-selector";
 
 export function TreatmentsScreen() {
   const [searchInput, setSearchInput, searchQuery] = useDebouncedQueryState(
@@ -41,6 +43,8 @@ export function TreatmentsScreen() {
     parseAsPageSize,
   );
 
+  const t = useTranslations("treatments");
+
   // Reset to page 1 when filters change
   useEffect(() => {
     if (page !== 1) {
@@ -58,11 +62,14 @@ export function TreatmentsScreen() {
 
   return (
     <div className="container mx-auto flex flex-col gap-6 py-10">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">DentalDesk</h1>
-        <p className="text-sm text-muted-foreground">
-          Track dental treatments and their status.
-        </p>
+      <header className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-semibold tracking-tight">
+            {t("title")}
+          </h1>
+          <p className="text-sm text-muted-foreground">{t("description")}</p>
+        </div>
+        <LanguageSelector />
       </header>
 
       <section className="flex flex-col gap-4 rounded-lg border bg-card/40 p-4">
@@ -86,7 +93,7 @@ export function TreatmentsScreen() {
                 {data.total} treatments
               </>
             ) : (
-              "No treatments found"
+              t("noTreatmentsFound")
             )}
           </div>
 

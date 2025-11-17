@@ -7,6 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import userEvent from "@testing-library/user-event";
 import { Toaster } from "sonner";
 import { NuqsTestingAdapter } from "nuqs/adapters/testing";
+import { NextIntlClientProvider } from "next-intl";
+import messages from "@/i18n/messages/en.json";
 
 const AllTheProviders = ({ children }: { children: ReactNode }) => {
   const queryClient = new QueryClient({
@@ -25,10 +27,12 @@ const AllTheProviders = ({ children }: { children: ReactNode }) => {
   });
   return (
     <NuqsTestingAdapter>
-      <QueryClientProvider client={queryClient}>
-        {children}
-        <Toaster />
-      </QueryClientProvider>
+      <NextIntlClientProvider locale="en" messages={messages}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+          <Toaster />
+        </QueryClientProvider>
+      </NextIntlClientProvider>
     </NuqsTestingAdapter>
   );
 };

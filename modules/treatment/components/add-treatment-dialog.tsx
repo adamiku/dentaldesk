@@ -24,10 +24,13 @@ import {
   CreateTreatmentFormSchema,
   type CreateTreatmentForm,
 } from "../treatment-types";
+import { useTranslations } from "next-intl";
 
 export function AddTreatmentDialog() {
   const [open, setOpen] = useState(false);
   const { mutate, isPending } = useCreateTreatment();
+
+  const t = useTranslations("treatments");
 
   const {
     register,
@@ -47,15 +50,15 @@ export function AddTreatmentDialog() {
   const onSubmit = (data: CreateTreatmentForm) => {
     mutate(data, {
       onSuccess: () => {
-        toast.success("Treatment created successfully");
+        toast.success(t("treatmentCreatedSuccessfully"));
         reset();
         setOpen(false);
       },
       onError: (error) => {
         if (error instanceof ApiError) {
-          toast.error(`Failed to create treatment: ${error.message}`);
+          toast.error(t("failedToCreateTreatment", { error: error.message }));
         } else {
-          toast.error("An unexpected error occurred");
+          toast.error(t("unexpectedError"));
         }
       },
     });
@@ -64,17 +67,17 @@ export function AddTreatmentDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Add treatment</Button>
+        <Button>{t("addTreatment")}</Button>
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>Add treatment</DialogTitle>
+            <DialogTitle>{t("addTreatment")}</DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="patient">Patient</Label>
+              <Label htmlFor="patient">{t("patient")}</Label>
               <Input
                 id="patient"
                 placeholder="Jane Doe"
@@ -88,7 +91,7 @@ export function AddTreatmentDialog() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="procedure">Procedure</Label>
+              <Label htmlFor="procedure">{t("procedure")}</Label>
               <Input
                 id="procedure"
                 placeholder="Filling"
@@ -102,7 +105,7 @@ export function AddTreatmentDialog() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="dentist">Dentist</Label>
+              <Label htmlFor="dentist">{t("dentist")}</Label>
               <Input
                 id="dentist"
                 placeholder="Dr. Smith"
@@ -116,7 +119,7 @@ export function AddTreatmentDialog() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="date">Date</Label>
+              <Label htmlFor="date">{t("date")}</Label>
               <Input id="date" type="date" {...register("date")} />
               {errors.date && (
                 <p className="text-sm text-destructive">
@@ -127,7 +130,7 @@ export function AddTreatmentDialog() {
 
             {/* No error handling since it is optional */}
             <div className="grid gap-2">
-              <Label htmlFor="notes">Notes (optional)</Label>
+              <Label htmlFor="notes">{t("notes")}</Label>
               <Textarea
                 id="notes"
                 placeholder="Add any treatment notes"
@@ -138,7 +141,7 @@ export function AddTreatmentDialog() {
 
           <DialogFooter>
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Saving..." : "Save treatment"}
+              {isPending ? t("saving") : t("saveTreatment")}
             </Button>
           </DialogFooter>
         </form>

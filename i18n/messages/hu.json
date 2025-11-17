@@ -1,0 +1,28 @@
+{
+  "treatments": {
+    "noTreatmentsFound": "Nem található kezelés",
+    "description": "Kövesse nyomon a fogászati kezeléseket és azok állapotát.",
+    "title": "DentalDesk",
+    "addTreatment": "Kezelés hozzáadása",
+    "treatmentCreatedSuccessfully": "Kezelés sikeresen létrehozva",
+    "failedToCreateTreatment": "Sikertelen kezelés létrehozása: {{error}}",
+    "unexpectedError": "Váratlan hiba történt",
+    "patient": "Páciens",
+    "procedure": "Eljárás",
+    "dentist": "Fogorvos",
+    "date": "Dátum",
+    "notes": "Jegyzetek (opcionális)",
+    "saving": "Mentés...",
+    "saveTreatment": "Kezelés mentése",
+    "itemsPerPage": "Elemek oldalanként",
+    "search": "Keresés páciensek, eljárások, fogorvosok között...",
+    "filterByStatus": "Szűrés állapot szerint",
+    "unknown": "Ismeretlen",
+    "updateStatus": "Állapot frissítése",
+    "statusUpdatedSuccessfully": "Állapot sikeresen frissítve",
+    "failedToUpdateStatus": "Sikertelen állapot frissítés",
+    "somethingWentWrong": "Valami hiba történt",
+    "retry": "Újra",
+    "status": "Állapot"
+  }
+}
