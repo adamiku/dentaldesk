@@ -1,6 +1,50 @@
 # Implementation Notes
 
-## What I Completed
+## TL;DR
+
+### What Was Completed
+
+- **All core requirements**: Component architecture (DDD style), data fetching (TanStack Query), add treatment dialog, search/status filters, pagination, status updates with optimistic UI
+- **Tests**: Comprehensive unit and integration tests using Vitest + MSW (55 tests passing)
+- **i18n & Error Handling**: Full internationalization (EN/HU) with next-intl, language selector. Two-tier error boundaries (app + page level) with translated error messages using react-error-boundary
+- **CI/CD**: GitHub Actions workflow with typecheck, lint, build, test verification
+- **Type Safety**: Comprehensive type safety using TypeScript, Zod, and next-intl
+
+### Data Fetching Strategy: TanStack Query (Client-Side)
+
+**Why this choice?**
+
+- **Perfect for highly interactive dashboards** - Instant filter/search feedback without server round-trips, debounce search
+- **Optimistic updates** - Status changes feel instant, rollback on error
+- **Smart caching** - 60s stale time, automatic refetch, request deduplication
+- **Behind authentication** - No SEO needed (would use hybrid/Server Components for public pages)
+- **Excellent testability** - Fast unit tests, easy mocking at API layer
+- **Built-in resilience** - Auto-retry (2x), request cancellation, error recovery
+
+### What I Would Tackle Next
+
+- **API content translation** - Translate backend responses (doctor names, procedures) for full i18n
+- **E2E tests** - Add Playwright for critical user flows (create treatment, filter, status update)
+- **Storybook** - Component documentation and visual testing
+- **Reusable search/filter** - Extract into generic `<DataTable>` component for other entities
+- **Deployment** - Set up dev/prod environments with real database (Vercel + PostgreSQL)
+- **Sentry monitoring** - Add error tracking and performance monitoring
+- **Analytics** - Add Google Analytics for user behavior tracking
+- **Authentication** - Add NextAuth.js with role-based access control
+- **Landing page** - Public marketing page with treatment tracking demo
+- **Doctors dropdown** - Replace text input with searchable select, validate against doctors list
+
+### Trade-offs & Assumptions
+
+- **Bundle size vs UX**: Chose TanStack Query (~13KB) for superior interactivity over Server Components' smaller bundle
+- **Traditional pagination vs infinite scroll**: Better accessibility, keyboard navigation, and shareability
+- **nuqs for URL state**: Avoids state management boilerplate, makes filters shareable
+- **DDD architecture**: More upfront structure for long-term maintainability and scalability
+- **shadcn/ui (Radix UI)**: Built on Radix UI primitives which are WAI-ARIA compliant out of the box - excellent accessibility (keyboard navigation, screen readers, focus management) with minimal effort
+
+---
+
+## What I Completed (Detailed)
 
 ### 1. CI/CD Setup
 
@@ -138,6 +182,55 @@
     - **Shareability**: URL params make it easy to share exact page/filter combinations
     - **Cognitive clarity**: Users know exactly where they are in the dataset
     - **Simpler implementation**: Less complex than intersection observers and virtual scrolling
+
+### 7. Error Handling & Internationalization
+
+- ✅ **Two-Tier Error Boundary Architecture**
+  - Implemented using `react-error-boundary` (2M+ weekly downloads, maintained by Kent C. Dodds)
+  - **App-level boundary** (`app/[locale]/providers.tsx`):
+    - Wraps entire application
+    - Catches all uncaught React errors globally
+    - Prevents full app crashes
+    - Logs errors for monitoring integration (Sentry-ready)
+  - **Page-level boundary** (`app/[locale]/treatments-page-content.tsx`):
+    - Wraps treatments feature specifically
+    - Provides granular error logging ("Treatments page error" vs "App-level error")
+    - Allows feature-specific error recovery
+    - Keeps other features working if one crashes
+
+- ✅ **Reusable Error Fallback Component** (`components/error-fallback.tsx`)
+  - Fully internationalized with next-intl
+  - Shows user-friendly error messages in current locale (EN/HU)
+  - Displays error message if available, otherwise generic description
+  - "Try again" button to reset error boundary
+  - Consistent UI with shadcn/ui components
+
+- ✅ **Internationalization (i18n)**
+  - Implemented using next-intl with App Router integration
+  - **Two locales**: English (en) and Hungarian (hu)
+  - **Middleware setup** (`middleware.ts`):
+    - Automatic locale detection and routing
+    - Redirects root `/` to default locale `/en`
+    - Handles `/en` and `/hu` routes
+  - **Translation files** (`i18n/messages/en.json`, `i18n/messages/hu.json`):
+    - Organized by namespace: `errors`, `treatments`
+    - All UI strings translated (55+ strings)
+    - Supports interpolation for dynamic values (`{{error}}`)
+  - **Language selector** (`components/language-selector.tsx`):
+    - Dropdown in header for switching languages
+    - Preserves current route and filters when switching
+    - Uses next-intl navigation for seamless transitions
+  - **Type-safe translations**:
+    - Full TypeScript support with `useTranslations` hook
+    - Compile-time checking for missing translation keys
+
+- ✅ **Benefits of Combined Approach**
+  - **Resilience**: Errors caught at multiple levels prevent cascading failures
+  - **User experience**: Friendly, translated error messages instead of blank screens
+  - **Developer experience**: Clear error logs with context for debugging
+  - **Maintainability**: Reusable components, easy to add more error boundaries
+  - **Accessibility**: Error messages respect user's language preference
+  - **Future-ready**: Easy to integrate with error monitoring services (Sentry, LogRocket)
 
 ## Project Conventions
 
