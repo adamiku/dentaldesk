@@ -237,10 +237,10 @@ At the end, add a short note in a `NOTES.md` file:
 
 ### ✅ Submission Checklist
 
-- [ ] Core requirements delivered (architecture, data, dialog, filters, pagination, status updates)
-- [ ] Solid UX and resilience (loading/empty/error states, retries, optimistic updates)
-- [ ] Clean commits; repo link shared; access granted if private
-- [ ] `NOTES.md` included with summary, next steps, and trade-offs
+- [x] Core requirements delivered (architecture, data, dialog, filters, pagination, status updates)
+- [x] Solid UX and resilience (loading/empty/error states, retries, optimistic updates)
+- [x] Clean commits; repo link shared; access granted if private
+- [x] `NOTES.md` included with summary, next steps, and trade-offs
 
 Optional: tests, i18n, and simple CI are appreciated.
 
